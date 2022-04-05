@@ -2,44 +2,36 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Modal, Form, Col, Row } from "react-bootstrap";
 
-function MovieForm(addMovie,  newMovie) {
+function MovieForm({ addMovie }) {
   const [modalShow, setModalShow] = useState(false);
   const [movies, setMovies] = useState({});
-  const [title, setTitle] = useState("");
-  const [image, setImage] = useState("");
-  const [desc, setDesc] = useState("");
-  const [year, setYear] = useState("");
-  const [trailer, setTrailer] = useState("");
-  const [link, setLink] = useState("");
-  const [rate, setRate] = useState(0);
+  const [Title, setTitle] = useState("");
+  const [Image, setImage] = useState("");
+  const [Des, setDes] = useState("");
+  const [Year, setYear] = useState("");
+  const [Rate, setRate] = useState(0);
 
   const add = (e) => {
     e.preventDefault();
-    newMovie = {
-      title,
-      image,
-      desc,
-      year,
-      trailer,
-      link,
-      rate,
+    let newMovie = {
+      Title,
+      Image,
+      Des,
+      Year,
+      Rate,
     };
 
-    if (
-      title === "" ||
-      year === "" ||
-      image === "" ||
-      link === "" ||
-      trailer === "" ||
-      desc === ""
-    )
-      addMovie(newMovie);
+    if (Title === "" || Year === "" || Image === "" || Des === "")
+      return alert("Missing some fields");
+
+    if (Rate <= 0) return alert("Rate must be above of zero");
+
+    // addMovie({ newMovie });
+    addMovie(newMovie);
     setTitle("");
-    setDesc("");
+    setDes("");
     setImage("");
-    setTrailer("");
     setRate(0);
-    setLink("");
     setYear("");
     setModalShow(false);
   };
@@ -67,7 +59,7 @@ function MovieForm(addMovie,  newMovie) {
                 <Form.Label>Title</Form.Label>
                 <Form.Control
                   type="test"
-                  value={title}
+                  value={Title}
                   placeholder="Enter movie title"
                   onChange={(e) => setTitle(e.target.value)}
                 />
@@ -77,7 +69,7 @@ function MovieForm(addMovie,  newMovie) {
                 <Form.Label>Year</Form.Label>
                 <Form.Control
                   type="text"
-                  value={year}
+                  value={Year}
                   placeholder="Enter movie year"
                   onChange={(e) => setYear(e.target.value)}
                 />
@@ -93,24 +85,8 @@ function MovieForm(addMovie,  newMovie) {
               <Form.Label>Movie Image</Form.Label>
               <Form.Control
                 placeholder="Enter movie image"
-                value={image}
+                value={Image}
                 onChange={(e) => setImage(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Movie Link</Form.Label>
-              <Form.Control
-                placeholder="Enter movie link"
-                value={link}
-                onChange={(e) => setLink(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Movie Trailer</Form.Label>
-              <Form.Control
-                placeholder="Enter movie trailer"
-                value={trailer}
-                onChange={(e) => setTrailer(e.target.value)}
               />
             </Form.Group>
 
@@ -118,8 +94,8 @@ function MovieForm(addMovie,  newMovie) {
               as="textarea"
               placeholder="Leave a description here"
               style={{ height: "100px" }}
-              value={desc}
-              onChange={(e) => setDesc(e.target.value)}
+              value={Des}
+              onChange={(e) => setDes(e.target.value)}
             />
 
             <Form.Group className="mb-3" controlId="formGridAddress2">
@@ -127,13 +103,12 @@ function MovieForm(addMovie,  newMovie) {
               <Form.Control
                 placeholder="Rate movie"
                 type="number"
-                value={rate}
+                value={Rate}
                 onChange={(e) => setRate(e.target.value)}
               />
             </Form.Group>
 
             <Button
-              variant="primary"
               type="submit"
               onClick={(e) => {
                 add(e);

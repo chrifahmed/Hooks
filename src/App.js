@@ -34,6 +34,9 @@ const App = () => {
       id: "123",
     },
   ]);
+  const [searchTxt, setSearchTxt] = useState("");
+  const [searchRate, setSearchRate] = useState(0);
+  // const newMovie = {};
 
   const addMovie = (newMovie) => {
     setMovies([...movies, newMovie]);
@@ -41,9 +44,20 @@ const App = () => {
 
   return (
     <>
-      <Header addMovie={addMovie} movies={movies} newMovie={newMovie} />
+      <Header
+        addMovie={addMovie}
+        movies={movies}
+        // newMovie={newMovie}
+        setSearchTxt={setSearchTxt}
+        setSearchRate={setSearchRate}
+        searchRate={searchRate}
+      />
       <div className="row">
-        <MovieList movies={movies} />
+        <MovieList
+          movies={movies}
+          searchRate={searchRate}
+          searchTxt={searchTxt}
+        />
       </div>
     </>
   );
