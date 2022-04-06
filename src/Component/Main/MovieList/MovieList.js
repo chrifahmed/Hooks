@@ -3,6 +3,8 @@ import ReactStars from "react-stars";
 import { Card, Button } from "react-bootstrap";
 import "./movieList.css";
 
+import { Link } from "react-router-dom";
+
 const MovieList = ({ searchRate, movies, searchTxt }) => {
   return (
     <>
@@ -30,7 +32,10 @@ const MovieList = ({ searchRate, movies, searchTxt }) => {
                 activeColor="#ffd700"
               />
               <Card.Text>{movies.Des}</Card.Text>
-              <Button>show More</Button>
+
+              <Link to={`/moviedetails/${movie.id}`}>
+                <Button>show More</Button>
+              </Link>
             </Card.Body>
           </Card>
         ))}

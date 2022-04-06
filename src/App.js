@@ -3,6 +3,8 @@ import React from "react";
 import { useState } from "react";
 import Header from "./componant/Header/Header";
 import MovieList from "./Component/Main/MovieList/MovieList";
+import { Routes, Route } from "react-router-dom";
+import MovieDetails from "./movieDetails/MovieDetails";
 
 const App = () => {
   const [movies, setMovies] = useState([
@@ -52,13 +54,25 @@ const App = () => {
         setSearchRate={setSearchRate}
         searchRate={searchRate}
       />
-      <div className="row">
-        <MovieList
-          movies={movies}
-          searchRate={searchRate}
-          searchTxt={searchTxt}
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="row">
+              <MovieList
+                movies={movies}
+                searchRate={searchRate}
+                searchTxt={searchTxt}
+              />
+            </div>
+          }
         />
-      </div>
+        <Route
+          path="/moviedetails/:idmovie"
+          element={<MovieDetails movies={movies} />}
+        />
+      </Routes>
     </>
   );
 };
